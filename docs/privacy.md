@@ -1,7 +1,7 @@
 # Viora — Privacy Policy
 
 > **Placeholders.** Replace every `[BRACKETED]` token before launch:
-> `[DEVELOPER NAME]` · `[PROVINCE]` · `[CONTACT EMAIL]` · `[EFFECTIVE DATE]` ·
+> `[DEVELOPER NAME]` · `[PROVINCE]` · `[EFFECTIVE DATE]` ·
 > `[MIN AGE]` · `[SIGNALING LOG RETENTION]` · `[UPDATE LOG RETENTION]` ·
 > `[SIGNALING PROVIDER]` · `[STUN PROVIDER]` · `[TURN PROVIDER]` · `[UPDATE ENDPOINT]`
 >
@@ -11,7 +11,6 @@
 
 **Effective date:** `[EFFECTIVE DATE]`
 **Operator:** `[DEVELOPER NAME]`, an individual developer in `[PROVINCE]`, Canada
-**Contact:** `[CONTACT EMAIL]`
 
 ## 1. Summary
 
@@ -111,10 +110,9 @@ We will update the list above before adding or replacing any provider.
 - Granting camera, microphone, and screen-capture permission — and pressing
   "share" — is consent to transmit that media to session participants.
 - **Withdrawal:** stop sharing, mute, leave the session, or revoke the OS
-  permission at any time. Withdrawing consent stops future processing but does
-  not retroactively erase data already transmitted to peers or delete server
-  logs before their retention expiry; contact us (Section 15) for deletion
-  requests.
+   permission at any time. Withdrawing consent stops future processing but does
+   not retroactively erase data already transmitted to peers or delete server
+   logs before their retention expiry.
 
 ## 7. Limiting collection, use, disclosure, and retention
 
@@ -130,8 +128,7 @@ anonymized.
 
 Because we hold almost no information about you, accuracy risks are minimal.
 Your display name and settings are stored locally and you can correct them in
-the app at any time. If you believe any information we hold about you is
-inaccurate, contact us and we will correct it.
+the app at any time.
 
 ## 9. Safeguards
 
@@ -182,9 +179,9 @@ Additional rights by region:
   authority. Our legal bases are listed in Section 3.
 - **California (CCPA/CPRA):** the right to know, delete, and correct personal
   information; we do not sell or share personal information as those terms are
-  defined.
+   defined.
 
-To exercise any right, contact `[CONTACT EMAIL]`. We will respond within the
+We will respond to rights requests within the
 time the applicable law requires (generally 30 days under PIPEDA) and we will
 never discriminate against you for exercising your rights.
 
@@ -193,11 +190,3 @@ never discriminate against you for exercising your rights.
 If we make material changes, we will update the effective date above and
 notify you in the app or on our download page before the changes take effect.
 Continued use after the effective date constitutes acceptance.
-
-## 15. Contact
-
-`[DEVELOPER NAME]` is accountable for compliance with this policy, including
-the role of person responsible for the protection of personal information.
-
-- Email: `[CONTACT EMAIL]`
-- Jurisdiction: `[PROVINCE]`, Canada

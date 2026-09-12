@@ -33,6 +33,7 @@
 
 /* Dark theme is the default (system dark / Tauri desktop) */
 :root {
+  color-scheme: dark;
   --bg-primary: #201d2b;
   --bg-secondary: #292637;
   --bg-tertiary: #353147;
@@ -60,6 +61,7 @@
 
 @media (prefers-color-scheme: light) {
   :root {
+    color-scheme: light;
     --bg-primary: #d8d4cf;
     --bg-secondary: #e7e3dc;
     --bg-tertiary: #cfc8bc;
@@ -87,6 +89,7 @@
 }
 
 [data-theme="light"] {
+  color-scheme: light;
   --bg-primary: #d8d4cf;
   --bg-secondary: #e7e3dc;
   --bg-tertiary: #cfc8bc;
@@ -113,6 +116,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg-primary: #201d2b;
   --bg-secondary: #292637;
   --bg-tertiary: #353147;

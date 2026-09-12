@@ -9,10 +9,10 @@ import {
   ChevronDown,
   type LucideIcon,
 } from 'lucide-react';
-import { Button, Select, Card, CardHeader, CardTitle, CardBody } from '../ui';
-import { AppLayout, TopBar } from '../layout';
-import { useMediaStore } from '../../store/useMediaStore';
-import { useSettingsStore } from '../../store/useSettingsStore';
+import { Button, Select, Card, CardHeader, CardTitle, CardBody } from '@/components/ui';
+import { AppLayout, TopBar } from '@/components/layout';
+import { useMediaStore } from '@/store/useMediaStore';
+import { useSettingsStore } from '@/store/useSettingsStore';
 
 export function PreflightScreen() {
   const { roomId: roomIdParam } = useParams<{ roomId: string }>();

@@ -8,7 +8,6 @@ export interface LegalDoc {
   effectiveDate: string;
   intro: string[];
   sections: LegalSection[];
-  contact: string[];
 }
 
 export const PRIVACY_DOC: LegalDoc = {
@@ -89,11 +88,10 @@ export const PRIVACY_DOC: LegalDoc = {
     {
       heading: '11. Your rights',
       body: [
-        'Under PIPEDA and applicable provincial statutes you may request access to your information, request corrections, withdraw consent (subject to legal restrictions), and challenge our compliance — including by complaining to the Office of the Privacy Commissioner of Canada (opc-privacy.gc.ca). EU/UK users have GDPR rights of access, rectification, erasure, restriction, portability, and objection. California users have CCPA/CPRA rights to know, delete, and correct; we do not sell or share personal information. To exercise any right, contact [CONTACT EMAIL].',
+        'Under PIPEDA and applicable provincial statutes you may request access to your information, request corrections, withdraw consent (subject to legal restrictions), and challenge our compliance — including by complaining to the Office of the Privacy Commissioner of Canada (opc-privacy.gc.ca). EU/UK users have GDPR rights of access, rectification, erasure, restriction, portability, and objection. California users have CCPA/CPRA rights to know, delete, and correct; we do not sell or share personal information.',
       ],
     },
   ],
-  contact: ['[DEVELOPER NAME] — [CONTACT EMAIL] — [PROVINCE], Canada'],
 };
 
 export const TERMS_DOC: LegalDoc = {
@@ -113,60 +111,46 @@ export const TERMS_DOC: LegalDoc = {
       ],
     },
     {
-      heading: '2. Acceptable use',
-      body: [
-        'You agree not to use the Service for illegal content (including child sexual abuse material); harassment, threats, or defamation; infringing others’ intellectual property, privacy, or other rights; recording or re-distributing another participant’s media without all legally required consents; probing or disrupting the Service or its signaling/STUN/TURN infrastructure; introducing malware; deceptive impersonation; or emergency communications.',
-        'We may suspend or terminate access for violations, at our sole discretion.',
-      ],
-    },
-    {
-      heading: '3. Recording and consent — your responsibility',
+      heading: '2. Recording and consent — your responsibility',
       body: [
         'You are solely responsible for complying with all recording, interception, and privacy laws that apply to you and every participant. Under section 184 of Canada’s Criminal Code, intercepting a private communication without the consent of at least one party is a criminal offence; in Quebec, the consent of all parties is required. Many other jurisdictions require all-party consent. The conservative practice is to announce sharing/recording and proceed only with everyone’s agreement.',
       ],
     },
     {
-      heading: '4. Not for emergencies',
+      heading: '3. Not for emergencies',
       body: [
         'Viora is not a telephone service and cannot place emergency calls. Do not rely on it to contact police, fire, ambulance, or other emergency services.',
       ],
     },
     {
-      heading: '5. Intellectual property',
+      heading: '4. Intellectual property',
       body: [
         'Your content stays yours. Because Viora is peer-to-peer and we do not store your media, you grant us no ongoing license in it. Viora’s software, design, name, logo, and branding are owned by [DEVELOPER NAME] and licensed to you — not sold — for personal or internal business use. You may not copy, modify, redistribute, or create derivative works except as permitted by law or with our prior written permission.',
       ],
     },
     {
-      heading: '6. Privacy',
+      heading: '5. Privacy',
       body: [
         'Our handling of personal information is described in the Privacy Policy. WebRTC calling necessarily exposes your IP address to peers and to the signaling/STUN/TURN servers that establish your connection.',
       ],
     },
     {
-      heading: '7. Changes and termination',
-      body: [
-        'We may modify or discontinue any part of the Service and may update these Terms with notice in the app or on our download page; continued use after the effective date constitutes acceptance. You may stop using Viora at any time by leaving sessions and uninstalling. We may suspend or terminate your access to the infrastructure at any time for violations, abuse, or operational or legal reasons.',
-      ],
-    },
-    {
-      heading: '8. Disclaimers and liability',
+      heading: '6. Disclaimers and liability',
       body: [
         'THE SERVICE IS PROVIDED “AS IS” AND “AS AVAILABLE”, WITHOUT WARRANTIES OF ANY KIND. To the maximum extent permitted by law, [DEVELOPER NAME] is not liable for indirect, incidental, special, consequential, or punitive damages, or loss of data, profits, or revenue — including from content shared, recorded, or re-distributed by participants. Total liability is limited to amounts you paid for the Service. Nothing here limits liability where prohibited by your province’s consumer protection legislation. You agree to indemnify [DEVELOPER NAME] against claims arising from your use, your violations of these Terms, or content you shared or recorded without required rights or consents.',
       ],
     },
     {
-      heading: '9. Governing law and disputes',
+      heading: '7. Governing law and disputes',
       body: [
         'These Terms are governed by the laws of [PROVINCE], Canada, and applicable federal laws, without regard to conflict-of-laws rules. Disputes go exclusively before the courts of [PROVINCE], Canada. Consumer protection legislation in your province granting additional forum or remedy rights prevails.',
       ],
     },
     {
-      heading: '10. General',
+      heading: '8. General',
       body: [
-        'These Terms plus the Privacy Policy are the entire agreement regarding the Service. Unenforceable provisions are severed; the rest continues. Failure to enforce a provision is not a waiver. You may not assign these Terms without our consent. Questions: [CONTACT EMAIL].',
+        'These Terms plus the Privacy Policy are the entire agreement regarding the Service. Unenforceable provisions are severed; the rest continues. Failure to enforce a provision is not a waiver. You may not assign these Terms without our consent.',
       ],
     },
   ],
-  contact: ['[DEVELOPER NAME] — [CONTACT EMAIL] — [PROVINCE], Canada'],
 };

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { SettingsState, SettingsAction, DEFAULT_SETTINGS } from '../types/settings';
+import { SettingsState, SettingsAction, DEFAULT_SETTINGS } from '@/types/settings';
 
 type SettingsStore = SettingsState & {
   dispatch: (action: SettingsAction) => void;
@@ -91,13 +91,18 @@ export const useSettingsStore = create<SettingsStore>()(
   )
 );
 
-function applyTheme(theme: SettingsState['theme']) {
-  const root = document.documentElement;
-  if (theme === 'system') {
-    root.removeAttribute('data-theme');
-  } else {
-    root.setAttribute('data-theme', theme);
+function resolveSystemTheme(): 'dark' | 'light' {
+  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
+  return 'dark';
+}
+
+export function applyTheme(theme: SettingsState['theme']) {
+  const root = document.documentElement;
+  const effective = theme === 'system' ? resolveSystemTheme() : theme;
+  root.setAttribute('data-theme', effective);
+  root.style.colorScheme = effective;
 }
 
 if (typeof window !== 'undefined') {

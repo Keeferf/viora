@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Monitor, Mic, Video, LogOut } from 'lucide-react';
-import { Button, Card } from '../ui';
-import { AppLayout, TopBar } from '../layout';
-import { useSessionStore } from '../../store/useSessionStore';
-import { useMediaStore } from '../../store/useMediaStore';
+import { Button, Card } from '@/components/ui';
+import { AppLayout, TopBar } from '@/components/layout';
+import { useSessionStore } from '@/store/useSessionStore';
+import { useMediaStore } from '@/store/useMediaStore';
 
 export function SessionScreen() {
   const { roomCode } = useParams<{ roomCode: string }>();

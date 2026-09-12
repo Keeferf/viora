@@ -1,7 +1,7 @@
 # Viora — Terms of Service
 
 > **Placeholders.** Replace every `[BRACKETED]` token before launch:
-> `[DEVELOPER NAME]` · `[PROVINCE]` · `[CONTACT EMAIL]` · `[EFFECTIVE DATE]` ·
+> `[DEVELOPER NAME]` · `[PROVINCE]` · `[EFFECTIVE DATE]` ·
 > `[MIN AGE]`
 >
 > **Not legal advice.** This draft is written for an individual developer
@@ -9,7 +9,6 @@
 
 **Effective date:** `[EFFECTIVE DATE]`
 **Operator:** `[DEVELOPER NAME]`, an individual developer in `[PROVINCE]`, Canada
-**Contact:** `[CONTACT EMAIL]`
 
 ## 1. Acceptance and eligibility
 
@@ -181,4 +180,3 @@ prevail.
   to enforce it later.
 - **Assignment.** You may not assign these Terms without our consent; we may
   assign them in connection with a transfer of the Service.
-- **Contact.** Questions about these Terms: `[CONTACT EMAIL]`.

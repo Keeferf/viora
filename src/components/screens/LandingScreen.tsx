@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Monitor, Users, Zap, Shield, type LucideIcon } from 'lucide-react';
 import { JoinForm } from './JoinForm';
 import { CreateForm } from './CreateForm';
-import { AppLayout } from '../layout/AppLayout';
-import { Card, CardBody } from '../ui';
-import { Button } from '../ui';
+import { AppLayout } from '@/components/layout/AppLayout';
+import { Card, CardBody } from '@/components/ui';
+import { Button } from '@/components/ui';
 
 export function LandingScreen() {
   const navigate = useNavigate();

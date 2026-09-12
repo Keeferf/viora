@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { MediaDeviceInfo, ScreenSource } from '../types/session';
+import type { MediaDeviceInfo, ScreenSource } from '@/types/session';
 
 interface MediaStore {
   cameras: MediaDeviceInfo[];

@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type MouseEvent } from 'react';
 import { ArrowRight, AlertCircle } from 'lucide-react';
-import { Button, Input, Card, CardHeader, CardTitle, CardBody, CardFooter } from '../ui';
+import { Button, Input, Card, CardHeader, CardTitle, CardBody, CardFooter } from '@/components/ui';
 
 interface CreateFormProps {
   onCreate: (name: string) => void;

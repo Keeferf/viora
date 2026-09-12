@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LandingScreen, PreflightScreen, SessionScreen, PrivacyScreen, TermsScreen } from './components/screens';
-import { useSettingsStore } from './store/useSettingsStore';
+import { useSettingsStore, applyTheme } from './store/useSettingsStore';
 import './index.css';
 
 function App() {
   const theme = useSettingsStore(state => state.theme);
-  
+
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'system') {
-      root.removeAttribute('data-theme');
-    } else {
-      root.setAttribute('data-theme', theme);
-    }
+    applyTheme(theme);
+    if (theme !== 'system') return;
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    const onChange = () => applyTheme('system');
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
   }, [theme]);
 
   return (

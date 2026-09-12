@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { SessionState, PeerState, QualityLevel, SimulcastLayer, ConnectionStatus } from '../types/session';
+import type { SessionState, PeerState, QualityLevel, SimulcastLayer, ConnectionStatus } from '@/types/session';
 
 type SessionStore = SessionState & {
   joinRoom: (roomId: string, roomCode: string, localPeerId: string, name: string) => void;

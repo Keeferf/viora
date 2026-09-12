@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { Button, Card, CardBody } from '../ui';
-import { AppLayout, TopBar } from '../layout';
-import { PRIVACY_DOC, TERMS_DOC, type LegalDoc } from '../../content/legal';
+import { Button, Card, CardHeader } from '@/components/ui';
+import { AppLayout, TopBar } from '@/components/layout';
+import { PRIVACY_DOC, TERMS_DOC, type LegalDoc } from '@/content/legal';
 
 interface LegalScreenProps {
   doc: 'privacy' | 'terms';
@@ -30,41 +30,36 @@ export function LegalScreen({ doc }: LegalScreenProps) {
         }
       />
       <main className="flex-1 overflow-y-auto px-6 py-8">
-        <div className="mx-auto w-full max-w-[760px] flex flex-col gap-4">
-          <Card>
-            <CardBody className="flex flex-col gap-3">
-              <h1 className="text-xl font-bold">{content.title}</h1>
-              <p className="text-xs text-muted">Effective date: {content.effectiveDate}</p>
-              {content.intro.map((p, i) => (
-                <p key={i} className="text-sm text-secondary leading-relaxed">
-                  {p}
-                </p>
-              ))}
-            </CardBody>
-          </Card>
-
-          {content.sections.map((section) => (
-            <Card key={section.heading}>
-              <CardBody className="flex flex-col gap-2">
-                <h2 className="text-base font-semibold">{section.heading}</h2>
-                {section.body.map((p, i) => (
+        <div className="mx-auto w-full max-w-[760px]">
+          <Card padding="none">
+            <CardHeader>
+              <h1 className="text-xl font-bold tracking-tight">{content.title}</h1>
+              <p className="text-xs text-muted mt-1">Effective date: {content.effectiveDate}</p>
+            </CardHeader>
+            <div>
+              <div className="flex flex-col gap-3 px-6 py-5">
+                {content.intro.map((p, i) => (
                   <p key={i} className="text-sm text-secondary leading-relaxed">
                     {p}
                   </p>
                 ))}
-              </CardBody>
-            </Card>
-          ))}
+              </div>
 
-          <Card>
-            <CardBody className="flex flex-col gap-2">
-              <h2 className="text-base font-semibold">Contact</h2>
-              {content.contact.map((p, i) => (
-                <p key={i} className="text-sm text-secondary leading-relaxed">
-                  {p}
-                </p>
-              ))}
-            </CardBody>
+              <article className="flex flex-col divide-y divide-line border-t border-line">
+                {content.sections.map((section) => (
+                  <section key={section.heading} className="flex flex-col gap-2 px-6 py-5">
+                    <h2 className="text-[13px] font-semibold uppercase tracking-wide text-primary">
+                      {section.heading}
+                    </h2>
+                    {section.body.map((p, i) => (
+                      <p key={i} className="text-sm text-secondary leading-relaxed">
+                        {p}
+                      </p>
+                    ))}
+                  </section>
+                ))}
+              </article>
+            </div>
           </Card>
         </div>
       </main>
