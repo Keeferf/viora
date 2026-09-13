@@ -29,9 +29,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={[
-              'w-full px-3.5 py-3 text-sm bg-surface border rounded-[10px] text-primary',
-              'placeholder:text-muted transition-all outline-hidden',
-              'hover:border-muted focus:border-focus focus:ring-2 focus:ring-accent/20',
+              'w-full px-4 py-3 text-[15px] font-medium bg-base border rounded-[10px] text-primary',
+              'placeholder:text-muted placeholder:font-normal transition-all outline-hidden',
+              'hover:border-muted focus:border-focus focus:ring-2 focus:ring-accent/25 focus:bg-surface',
               'disabled:opacity-50 disabled:cursor-not-allowed',
               error ? 'border-danger focus:ring-danger/20' : 'border-line',
               leftIcon ? 'pl-10' : '',

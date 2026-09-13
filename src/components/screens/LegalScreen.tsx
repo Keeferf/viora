@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { Button, Card, CardHeader } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { AppLayout, TopBar } from '@/components/layout';
 import { PRIVACY_DOC, TERMS_DOC, type LegalDoc } from '@/content/legal';
 
@@ -28,38 +28,35 @@ export function LegalScreen({ doc }: LegalScreenProps) {
           </Button>
         }
       />
-      <main className="flex-1 overflow-y-auto px-6 py-8">
-        <div className="mx-auto w-full max-w-[760px]">
-          <Card padding="none">
-            <CardHeader>
-              <h1 className="font-display text-xl tracking-tight">{content.title}</h1>
-              <p className="text-xs text-muted mt-1">Effective date: {content.effectiveDate}</p>
-            </CardHeader>
-            <div>
-              <div className="flex flex-col gap-3 px-6 py-5">
-                {content.intro.map((p, i) => (
-                  <p key={i} className="text-sm text-secondary leading-relaxed">
+      <main className="flex-1 w-full max-w-[720px] mx-auto px-6 sm:px-8 py-10">
+        <p className="text-sm text-muted">Effective date: {content.effectiveDate}</p>
+        <h1 className="font-display uppercase tracking-tight leading-[0.95] text-[clamp(2.2rem,5vw,3.6rem)] mt-2">
+          {content.title}
+        </h1>
+        <div className="mt-6 flex flex-col gap-4 border-t-2 border-accent pt-6">
+          {content.intro.map((p, i) => (
+            <p key={i} className="text-[15px] text-secondary leading-relaxed max-w-[68ch]">
+              {p}
+            </p>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col">
+          {content.sections.map((section, i) => (
+            <section key={section.heading} className="border-t border-line py-6">
+              <h2 className="font-display uppercase tracking-wide text-lg">
+                <span className="text-ember mr-3 text-sm">{String(i + 1).padStart(2, '0')}</span>
+                {section.heading}
+              </h2>
+              <div className="mt-3 flex flex-col gap-3">
+                {section.body.map((p, j) => (
+                  <p key={j} className="text-[15px] text-secondary leading-relaxed max-w-[68ch]">
                     {p}
                   </p>
                 ))}
               </div>
-
-              <article className="flex flex-col divide-y divide-line border-t border-line">
-                {content.sections.map((section) => (
-                  <section key={section.heading} className="flex flex-col gap-2 px-6 py-5">
-                    <h2 className="text-[13px] font-semibold uppercase tracking-wide text-primary">
-                      {section.heading}
-                    </h2>
-                    {section.body.map((p, i) => (
-                      <p key={i} className="text-sm text-secondary leading-relaxed">
-                        {p}
-                      </p>
-                    ))}
-                  </section>
-                ))}
-              </article>
-            </div>
-          </Card>
+            </section>
+          ))}
         </div>
       </main>
     </AppLayout>

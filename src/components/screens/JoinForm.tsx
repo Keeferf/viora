@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type MouseEvent } from 'react';
 import { ArrowRight, AlertCircle } from 'lucide-react';
-import { Button, Input, Card, CardHeader, CardTitle, CardBody, CardFooter } from '@/components/ui';
+import { Button, Input } from '@/components/ui';
 
 interface JoinFormProps {
   onJoin: (roomCode: string, name: string) => void;
@@ -49,48 +49,46 @@ export function JoinForm({ onJoin, isLoading, error }: JoinFormProps) {
   };
 
   return (
-    <Card padding="none" className="flex-1 w-full max-w-[420px]">
-      <CardHeader>
-        <CardTitle>Join a Session</CardTitle>
-      </CardHeader>
-      <CardBody>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <Input
-            label="Room Code"
-            placeholder="A7K9M2"
-            value={roomCode}
-            onChange={handleCodeChange}
-            error={codeError || error || undefined}
-            maxLength={6}
-            autoComplete="off"
-            spellCheck={false}
-            autoFocus
-            disabled={isLoading}
-          />
-          <Input
-            label="Your Name"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            error={nameError || undefined}
-            maxLength={30}
-            autoComplete="name"
-            disabled={isLoading}
-          />
-          {error && (
-            <div className="flex items-center gap-2 p-3 bg-danger/10 border border-danger rounded-[10px] text-danger text-sm">
-              <AlertCircle size={18} className="shrink-0" />
-              <span>{error}</span>
-            </div>
-          )}
-        </form>
-      </CardBody>
-      <CardFooter>
-        <Button type="button" fullWidth loading={isLoading} onClick={handleSubmit}>
-          <span>Join Session</span>
+    <div className="w-full">
+      <h2 className="font-display uppercase tracking-wide text-lg">Join a session</h2>
+      <p className="text-[13px] text-secondary mt-1 mb-4">
+        Ask your host for the six-character code.
+      </p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <Input
+          label="Room code"
+          placeholder="A7K9M2"
+          value={roomCode}
+          onChange={handleCodeChange}
+          error={codeError || error || undefined}
+          maxLength={6}
+          autoComplete="off"
+          spellCheck={false}
+          autoFocus
+          disabled={isLoading}
+          className="room-code-type text-center text-lg font-bold uppercase"
+        />
+        <Input
+          label="Your name"
+          placeholder="Ada Lovelace"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          error={nameError || undefined}
+          maxLength={30}
+          autoComplete="name"
+          disabled={isLoading}
+        />
+        {error && (
+          <div className="flex items-center gap-2 px-3.5 py-3 bg-danger/10 border border-danger/40 rounded-[10px] text-danger text-sm">
+            <AlertCircle size={18} className="shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
+        <Button type="submit" fullWidth size="lg" loading={isLoading} onClick={handleSubmit}>
+          <span>Join session</span>
           <ArrowRight size={18} />
         </Button>
-      </CardFooter>
-    </Card>
+      </form>
+    </div>
   );
 }

@@ -86,7 +86,7 @@ export function Modal({
       />
       <div
         ref={modalRef}
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[310] bg-surface border border-line rounded-3xl shadow-2xl max-w-[90vw] max-h-[90vh] overflow-hidden animate-[slide-up_200ms_ease] ${sizeClasses[size]}`}
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[310] bg-surface border border-line rounded-[18px] max-w-[90vw] max-h-[90vh] overflow-hidden animate-[slide-up_200ms_ease] ${sizeClasses[size]}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}

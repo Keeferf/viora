@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Monitor, Users, Zap, Shield, type LucideIcon } from 'lucide-react';
+import { Monitor, Users, Zap, Shield, Radio, type LucideIcon } from 'lucide-react';
 import { JoinForm } from './JoinForm';
 import { CreateForm } from './CreateForm';
 import { AppLayout } from '@/components/layout/AppLayout';
-import { Card, CardBody } from '@/components/ui';
 import { Button } from '@/components/ui';
 
 export function LandingScreen() {
@@ -42,64 +41,72 @@ export function LandingScreen() {
 
   return (
     <AppLayout>
-      <main className="min-h-[calc(100vh-56px)] overflow-y-auto flex flex-col items-center px-10 py-8">
-        <div className="w-full max-w-[1400px] flex flex-col gap-8 m-auto">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/20 mb-3">
-              <Monitor size={28} className="text-accent" />
-            </div>
-            <h1 className="font-display text-4xl tracking-tight mb-2">Viora</h1>
-            <p className="text-base text-secondary max-w-[640px] mx-auto">
-              High-quality screen sharing for teams. Share your screen, collaborate in real-time,
-              zero setup.
+      <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-12 sm:pt-16 pb-10">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start">
+          <div className="animate-rise">
+            <p className="flex items-center gap-2 text-sm text-secondary mb-5">
+              <span className="inline-block w-2 h-2 rounded-full bg-ember animate-[live-ping_2s_ease-out_infinite]" />
+              Peer-to-peer screen sharing, no accounts
             </p>
-          </div>
+            <h1 className="font-display uppercase leading-[0.92] tracking-tight text-[clamp(3.2rem,8vw,6.5rem)]">
+              Share the
+              <br />
+              screen.
+              <br />
+              <span className="display-outline">Keep the room.</span>
+            </h1>
+            <p className="mt-6 text-[17px] leading-relaxed text-secondary max-w-[46ch]">
+              Viora opens a direct WebRTC line between you and your team. Drop in with a
+              six-character code, pass the screen around, and get out. Nothing to install
+              beyond this window.
+            </p>
 
-          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            <FeatureCard
-              icon={Zap}
-              title="Instant Sessions"
-              desc="Create or join rooms with a 6-character code. No accounts required."
-            />
-            <FeatureCard
-              icon={Monitor}
-              title="Multi-source Sharing"
-              desc="Share your entire screen, a specific window, or a browser tab with audio."
-            />
-            <FeatureCard
-              icon={Shield}
-              title="Peer-to-Peer"
-              desc="Direct WebRTC connections with end-to-end encryption. Your data never touches our servers."
-            />
-            <FeatureCard
-              icon={Users}
-              title="Adaptive Quality"
-              desc="Automatic bitrate adjustment for smooth streaming on any connection."
-            />
-          </div>
-
-          <div className="flex gap-6 items-stretch justify-center">
-            <div className="flex-1 flex flex-col max-w-[420px] w-full">
-              <div className="flex gap-2 mb-3 border-b border-line pb-2">
-                <div className="flex-1">
-                  <Button
-                    variant={activeTab === 'join' ? 'primary' : 'ghost'}
-                    fullWidth
-                    onClick={() => setActiveTab('join')}
-                  >
-                    Join Session
-                  </Button>
-                </div>
-                <div className="flex-1">
-                  <Button
-                    variant={activeTab === 'create' ? 'primary' : 'ghost'}
-                    fullWidth
-                    onClick={() => setActiveTab('create')}
-                  >
-                    Create Session
-                  </Button>
-                </div>
+            <dl className="mt-8 flex divide-x divide-line border-y border-line max-w-[520px]">
+              <div className="flex-1 py-3 pr-4">
+                <dt className="text-xs text-muted">Setup</dt>
+                <dd className="font-display text-xl tracking-wide">ZERO</dd>
               </div>
+              <div className="flex-1 px-4 py-3">
+                <dt className="text-xs text-muted">Room code</dt>
+                <dd className="font-display text-xl tracking-wide">6 CHARS</dd>
+              </div>
+              <div className="flex-1 pl-4 py-3">
+                <dt className="text-xs text-muted">Relay via server</dt>
+                <dd className="font-display text-xl tracking-wide text-success">NEVER</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            className="animate-rise rounded-[18px] border border-line bg-surface overflow-hidden"
+            style={{ animationDelay: '90ms' }}
+          >
+            <div className="flex items-center gap-1.5 px-5 pt-4" aria-hidden>
+              <span className="w-2.5 h-2.5 rounded-full bg-danger/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-warning/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-success/80" />
+              <span className="ml-2 flex items-center gap-1.5 text-xs text-muted">
+                <Radio size={12} />
+                viora console
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-1 p-2 mt-3 mx-4 rounded-full bg-base border border-line">
+              <Button
+                variant={activeTab === 'join' ? 'primary' : 'ghost'}
+                fullWidth
+                onClick={() => setActiveTab('join')}
+              >
+                Join session
+              </Button>
+              <Button
+                variant={activeTab === 'create' ? 'primary' : 'ghost'}
+                fullWidth
+                onClick={() => setActiveTab('create')}
+              >
+                Create session
+              </Button>
+            </div>
+            <div className="p-5 pt-4">
               {activeTab === 'join' ? (
                 <JoinForm onJoin={handleJoin} isLoading={isLoading} error={error ?? undefined} />
               ) : (
@@ -109,29 +116,76 @@ export function LandingScreen() {
                   error={error ?? undefined}
                 />
               )}
-              <p className="text-center text-xs text-muted mt-4">
+              <p className="text-center text-xs text-muted mt-4 leading-relaxed">
                 By using Viora, you agree to our <Link to="/terms">Terms of Service</Link> and{' '}
                 <Link to="/privacy">Privacy Policy</Link>
               </p>
             </div>
           </div>
         </div>
+
+        <section aria-label="How Viora works" className="mt-14 animate-rise" style={{ animationDelay: '160ms' }}>
+          <ul className="border-t border-line">
+            <FeatureRow
+              icon={Zap}
+              title="Instant sessions"
+              desc="Create or join rooms with a 6-character code. No accounts, no invites, no waiting room."
+              meta="6-char code"
+            />
+            <FeatureRow
+              icon={Monitor}
+              title="Multi-source sharing"
+              desc="Share the entire screen, a single window, or a browser tab, with system audio when you need it."
+              meta="Screen · Window · Tab"
+            />
+            <FeatureRow
+              icon={Shield}
+              title="Peer-to-peer by default"
+              desc="Direct WebRTC connections with end-to-end encryption. Media never passes through our servers."
+              meta="WebRTC P2P"
+            />
+            <FeatureRow
+              icon={Users}
+              title="Adaptive quality"
+              desc="Bitrate follows the weakest connection in the room, so the session stays smooth for everyone."
+              meta="Auto bitrate"
+              last
+            />
+          </ul>
+        </section>
       </main>
     </AppLayout>
   );
 }
 
-function FeatureCard({ icon: Icon, title, desc }: { icon: LucideIcon; title: string; desc: string }) {
+function FeatureRow({
+  icon: Icon,
+  title,
+  desc,
+  meta,
+  last = false,
+}: {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  meta: string;
+  last?: boolean;
+}) {
   return (
-    <Card padding="none" className="flex flex-col h-full">
-      <CardBody className="flex-1 flex flex-col p-6">
-        <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent/20 mb-3">
-          <Icon size={20} className="text-accent" />
-        </div>
-        <h3 className="text-base font-semibold mb-1">{title}</h3>
-        <p className="text-sm text-secondary leading-snug flex-1">{desc}</p>
-      </CardBody>
-    </Card>
+    <li
+      className={`flex items-start gap-4 py-5 ${last ? 'border-b border-line' : 'border-b border-line'}`}
+    >
+      <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-[10px] bg-accent/15">
+        <Icon size={19} className="text-accent" />
+      </span>
+      <div className="flex-1 min-w-0">
+        <h2 className="font-semibold text-[15px]">{title}</h2>
+        <p className="text-sm text-secondary leading-relaxed max-w-[62ch] mt-0.5">{desc}</p>
+      </div>
+      <span className="hidden sm:block shrink-0 text-xs font-medium text-muted border border-line rounded-full px-3 py-1 mt-1">
+        {meta}
+      </span>
+    </li>
   );
 }
 

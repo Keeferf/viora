@@ -2,17 +2,28 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
+  ArrowRight,
   Loader2,
   Video,
   Monitor,
+  AppWindow,
+  Globe,
   AlertCircle,
-  ChevronDown,
+  Check,
   type LucideIcon,
 } from 'lucide-react';
-import { Button, Select, Card, CardHeader, CardTitle, CardBody } from '@/components/ui';
+import { Button, Select } from '@/components/ui';
 import { AppLayout, TopBar } from '@/components/layout';
 import { useMediaStore } from '@/store/useMediaStore';
 import { useSettingsStore } from '@/store/useSettingsStore';
+
+type SourceKind = 'screen' | 'window' | 'tab';
+
+const SOURCES: { kind: SourceKind; label: string; hint: string; icon: LucideIcon }[] = [
+  { kind: 'screen', label: 'Entire screen', hint: 'Everything, all monitors', icon: Monitor },
+  { kind: 'window', label: 'Application window', hint: 'One app, nothing else', icon: AppWindow },
+  { kind: 'tab', label: 'Browser tab', hint: 'One tab plus its audio', icon: Globe },
+];
 
 export function PreflightScreen() {
   const { roomId: roomIdParam } = useParams<{ roomId: string }>();
@@ -33,7 +44,8 @@ export function PreflightScreen() {
   } = useMediaStore();
   const { mirrorSelfView } = useSettingsStore();
   const [isEnumerating, setIsEnumerating] = useState(true);
-  const [showCameraSelect, setShowCameraSelect] = useState(false);
+  const [source, setSource] = useState<SourceKind>('screen');
+  const [shareAudio, setShareAudio] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStarting, setIsStarting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,162 +99,159 @@ export function PreflightScreen() {
 
   return (
     <AppLayout>
-      <TopBar title={`Room: ${roomCode}`} subtitle={isHost ? 'Host' : 'Guest'} onLeave={handleBack} />
-      <main className="flex-1 p-8 flex flex-col gap-6 overflow-auto">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="flex flex-col h-full">
-            <CardHeader>
-              <CardTitle>Camera Preview</CardTitle>
-            </CardHeader>
-            <CardBody className="flex-1 flex flex-col items-center justify-center min-h-[300px]">
-              <div className="relative w-full max-w-[640px] aspect-video rounded-2xl overflow-hidden bg-raised">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted
-                  playsInline
-                  className={`w-full h-full object-cover ${mirrorSelfView ? '-scale-x-100' : ''}`}
-                />
-                {isEnumerating && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                    <Loader2 size={32} className="text-accent animate-spin" />
-                  </div>
-                )}
-              </div>
-              <div className="flex items-center gap-3 mt-4 w-full max-w-[640px]">
-                <div className="flex-1">
-                  <Select
-                    value={selectedCameraId}
-                    onChange={(e) => setSelectedCamera(e.target.value)}
-                    options={cameras.map((c) => ({
-                      value: c.deviceId,
-                      label: c.label || `Camera ${c.deviceId.slice(0, 8)}`,
-                    }))}
-                    placeholder="Select camera"
-                    disabled={isEnumerating}
-                  />
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowCameraSelect(!showCameraSelect)}
-                  aria-label="Camera settings"
-                >
-                  <Video size={18} />
-                </Button>
-              </div>
-            </CardBody>
-          </Card>
-
-          <Card className="flex flex-col h-full">
-            <CardHeader>
-              <CardTitle>Audio Settings</CardTitle>
-            </CardHeader>
-            <CardBody className="flex-1 flex flex-col gap-5">
-              <div>
-                <label className="text-[13px] font-medium text-secondary">Microphone</label>
-                <div className="mt-1.5">
-                  <Select
-                    value={selectedMicrophoneId}
-                    onChange={(e) => setSelectedMicrophone(e.target.value)}
-                    options={microphones.map((m) => ({
-                      value: m.deviceId,
-                      label: m.label || `Mic ${m.deviceId.slice(0, 8)}`,
-                    }))}
-                    placeholder="Select microphone"
-                    disabled={isEnumerating}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-[13px] font-medium text-secondary">Speaker (Output)</label>
-                <div className="mt-1.5">
-                  <Select
-                    value="default"
-                    onChange={() => {}}
-                    options={[{ value: 'default', label: 'Default Device' }]}
-                    placeholder="Select speaker"
-                  />
-                </div>
-              </div>
-              <div className="p-4 bg-raised rounded-[10px]">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[13px] font-medium">Input Level</span>
-                  <span className="text-xs text-muted">-24 dB</span>
-                </div>
-                <div className="h-2 bg-base rounded-full overflow-hidden">
-                  <div className="w-[40%] h-full bg-accent rounded-full transition-[width] duration-100" />
-                </div>
-              </div>
-            </CardBody>
-          </Card>
+      <TopBar title={`Room ${roomCode}`} subtitle={isHost ? 'You are hosting' : `Joining as ${name || 'guest'}`} onLeave={handleBack} />
+      <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 py-8">
+        <div className="animate-rise">
+          <h1 className="font-display uppercase tracking-tight leading-none text-[clamp(2rem,4.5vw,3.2rem)]">
+            Check, pick, go live
+          </h1>
+          <p className="text-[15px] text-secondary mt-2 max-w-[60ch]">
+            Three quick checks before you open the room. Your camera never leaves this
+            device until you start sharing.
+          </p>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Screen Share Source</CardTitle>
-          </CardHeader>
-          <CardBody>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <ScreenSourceOption type="screen" label="Entire Screen" icon={Monitor} />
-              <ScreenSourceOption type="window" label="Application Window" icon={Monitor} />
-              <ScreenSourceOption type="tab" label="Browser Tab" icon={Monitor} />
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] mt-8 items-start">
+          <section aria-label="Camera preview" className="animate-rise" style={{ animationDelay: '60ms' }}>
+            <StepHeading n="01" title="Check your camera" />
+            <div className="relative w-full aspect-video rounded-[14px] overflow-hidden bg-black border border-line mt-3">
+              <video
+                ref={videoRef}
+                autoPlay
+                muted
+                playsInline
+                className={`w-full h-full object-cover ${mirrorSelfView ? '-scale-x-100' : ''}`}
+              />
+              {isEnumerating && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+                  <Loader2 size={32} className="text-accent animate-spin" />
+                </div>
+              )}
+              <span className="absolute top-3 left-3 flex items-center gap-1.5 text-xs font-medium bg-black/65 backdrop-blur px-2.5 py-1 rounded-full">
+                <Video size={12} className="text-accent" />
+                Preview
+              </span>
             </div>
-            <div className="flex items-center gap-3 mt-4 p-3 bg-raised rounded-[10px]">
+            <div className="flex items-center gap-3 mt-3">
+              <div className="flex-1">
+                <Select
+                  aria-label="Camera"
+                  value={selectedCameraId}
+                  onChange={(e) => setSelectedCamera(e.target.value)}
+                  options={cameras.map((c) => ({
+                    value: c.deviceId,
+                    label: c.label || `Camera ${c.deviceId.slice(0, 8)}`,
+                  }))}
+                  placeholder="Select camera"
+                  disabled={isEnumerating}
+                />
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <StepHeading n="02" title="Check your microphone" />
+              <div className="mt-3 rounded-[14px] border border-line bg-surface p-4">
+                <Select
+                  aria-label="Microphone"
+                  value={selectedMicrophoneId}
+                  onChange={(e) => setSelectedMicrophone(e.target.value)}
+                  options={microphones.map((m) => ({
+                    value: m.deviceId,
+                    label: m.label || `Mic ${m.deviceId.slice(0, 8)}`,
+                  }))}
+                  placeholder="Select microphone"
+                  disabled={isEnumerating}
+                />
+                <div className="mt-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[13px] font-medium">Input level</span>
+                    <span className="text-xs text-muted">live</span>
+                  </div>
+                  <div className="h-2 bg-base rounded-full overflow-hidden border border-line">
+                    <div className="w-[40%] h-full bg-success rounded-full transition-[width] duration-100" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section aria-label="Share source" className="animate-rise" style={{ animationDelay: '120ms' }}>
+            <StepHeading n="03" title="Pick what to share" />
+            <div role="radiogroup" aria-label="Screen share source" className="mt-3 flex flex-col rounded-[14px] border border-line bg-surface overflow-hidden">
+              {SOURCES.map((s, i) => {
+                const active = source === s.kind;
+                const Icon = s.icon;
+                return (
+                  <button
+                    key={s.kind}
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setSource(s.kind)}
+                    className={`flex items-center gap-3.5 px-4 py-4 text-left transition-colors cursor-pointer ${
+                      i > 0 ? 'border-t border-line' : ''
+                    } ${active ? 'bg-accent/10' : 'hover:bg-hover'}`}
+                  >
+                    <span
+                      className={`flex items-center justify-center w-10 h-10 shrink-0 rounded-[10px] ${
+                        active ? 'bg-accent text-white' : 'bg-raised text-secondary'
+                      }`}
+                    >
+                      <Icon size={19} />
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block font-semibold text-sm">{s.label}</span>
+                      <span className="block text-xs text-muted mt-0.5">{s.hint}</span>
+                    </span>
+                    <span
+                      className={`flex items-center justify-center w-5 h-5 shrink-0 rounded-full border ${
+                        active ? 'border-accent bg-accent text-white' : 'border-muted text-transparent'
+                      }`}
+                    >
+                      <Check size={12} strokeWidth={3} />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <label className="flex items-center gap-3 mt-3 px-4 py-3.5 rounded-[14px] border border-line bg-surface cursor-pointer text-sm">
               <input
                 type="checkbox"
-                id="system-audio"
+                checked={shareAudio}
+                onChange={(e) => setShareAudio(e.target.checked)}
                 className="accent-accent w-4 h-4"
               />
-              <label htmlFor="system-audio" className="text-sm cursor-pointer">
-                Share system audio
-              </label>
+              Share system audio
+            </label>
+
+            {error && (
+              <div className="flex items-center gap-2 mt-4 px-4 py-3 bg-danger/10 border border-danger/40 rounded-[10px] text-danger text-sm">
+                <AlertCircle size={18} className="shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-3 mt-5">
+              <Button variant="secondary" onClick={handleBack} disabled={isStarting}>
+                <ArrowLeft size={18} />
+                Back
+              </Button>
+              <Button size="lg" fullWidth onClick={handleStart} loading={isStarting} className="flex-1">
+                Start sharing
+                <ArrowRight size={18} />
+              </Button>
             </div>
-          </CardBody>
-        </Card>
-
-        {error && (
-          <div className="flex items-center gap-2 px-4 py-3 bg-danger/10 border border-danger rounded-[10px] text-danger text-sm">
-            <AlertCircle size={18} className="shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
-
-        <div className="flex justify-between gap-4 mt-auto">
-          <Button variant="secondary" onClick={handleBack} disabled={isStarting}>
-            <ArrowLeft size={18} />
-            Back
-          </Button>
-          <Button
-            fullWidth
-            onClick={handleStart}
-            loading={isStarting}
-            className="max-w-[280px]"
-          >
-            Start Sharing
-            <ChevronDown size={18} />
-          </Button>
+          </section>
         </div>
       </main>
     </AppLayout>
   );
 }
 
-function ScreenSourceOption({
-  label,
-  icon: Icon,
-}: {
-  type: string;
-  label: string;
-  icon: LucideIcon;
-}) {
+function StepHeading({ n, title }: { n: string; title: string }) {
   return (
-    <button className="inline-flex flex-col items-center gap-3 p-5 text-center min-h-[120px] rounded-[10px] bg-raised text-primary border border-line hover:bg-hover transition-colors cursor-pointer">
-      <span className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/20">
-        <Icon size={28} className="text-accent" />
-      </span>
-      <span className="font-medium">{label}</span>
-      <span className="text-xs text-muted">Click to select</span>
-    </button>
+    <div className="flex items-baseline gap-3">
+      <span className="font-display text-sm text-ember tracking-widest">{n}</span>
+      <h2 className="font-display uppercase tracking-wide text-lg">{title}</h2>
+    </div>
   );
 }
