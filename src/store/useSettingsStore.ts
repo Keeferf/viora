@@ -14,11 +14,7 @@ export const useSettingsStore = create<SettingsStore>()(
     (set, get) => ({
       ...DEFAULT_SETTINGS,
       dispatch: (action: SettingsAction) => {
-        const state = get();
         switch (action.type) {
-          case 'SET_THEME':
-            set({ theme: action.payload });
-            break;
           case 'SET_RESOLUTION':
             set({ defaultResolution: action.payload });
             break;
@@ -68,10 +64,9 @@ export const useSettingsStore = create<SettingsStore>()(
             set(DEFAULT_SETTINGS);
             break;
           case 'HYDRATE':
-            set({ ...state, ...action.payload });
+            set({ ...get(), ...action.payload });
             break;
         }
-        applyTheme(get().theme);
       },
       reset: () => set(DEFAULT_SETTINGS),
     }),
@@ -82,39 +77,6 @@ export const useSettingsStore = create<SettingsStore>()(
         const { dispatch, reset, ...rest } = state;
         return rest;
       },
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          applyTheme(state.theme);
-        }
-      },
     }
   )
 );
-
-function resolveSystemTheme(): 'dark' | 'light' {
-  if (typeof window !== 'undefined' && typeof window.matchMedia === 'function') {
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  }
-  return 'dark';
-}
-
-export function applyTheme(theme: SettingsState['theme']) {
-  const root = document.documentElement;
-  const effective = theme === 'system' ? resolveSystemTheme() : theme;
-  root.setAttribute('data-theme', effective);
-  root.style.colorScheme = effective;
-}
-
-if (typeof window !== 'undefined') {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored);
-      applyTheme(parsed.state?.theme || 'system');
-    } catch {
-      applyTheme('system');
-    }
-  } else {
-    applyTheme('system');
-  }
-}

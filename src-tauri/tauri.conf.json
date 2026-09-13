@@ -17,7 +17,9 @@
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self' ipc: asset:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' asset: data: blob:; font-src 'self' asset: data: https://fonts.gstatic.com; media-src 'self' blob: mediastream:; connect-src 'self' ipc: http://ipc.localhost; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'",
+      "devCsp": "default-src 'self' ipc: asset: http://localhost:1420; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:1420; style-src 'self' 'unsafe-inline' http://localhost:1420 https://fonts.googleapis.com; img-src 'self' asset: data: blob: http://localhost:1420; font-src 'self' asset: data: http://localhost:1420 https://fonts.gstatic.com; media-src 'self' blob: mediastream:; connect-src 'self' ipc: http://ipc.localhost http://localhost:1420 ws://localhost:1421; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src 'none'",
+      "freezePrototype": true
     }
   },
   "bundle": {

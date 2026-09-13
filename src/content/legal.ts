@@ -33,7 +33,7 @@ export const PRIVACY_DOC: LegalDoc = {
         'Display name you enter — to identify you to other participants. Stored locally on your device; shared with session peers.',
         'Live media (screen, camera, microphone, system audio) — transmitted peer-to-peer, encrypted in transit with DTLS-SRTP. Never recorded or stored by us. When a direct connection fails, encrypted packets are relayed through our TURN server, which forwards ciphertext only and cannot view the content.',
         'Device labels and connection statistics (bitrate, latency, resolution) — shown to you in the app; session only.',
-        'App settings (theme, resolution, device selections) — stored on your device only (viora-settings); never uploaded.',
+        'App settings (resolution, device selections) — stored on your device only (viora-settings); never uploaded.',
         'Update check data (IP address, app version, OS/architecture, timestamp) — to check for and deliver app updates. Kept for [UPDATE LOG RETENTION].',
       ],
     },

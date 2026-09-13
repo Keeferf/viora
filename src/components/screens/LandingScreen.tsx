@@ -42,20 +42,20 @@ export function LandingScreen() {
 
   return (
     <AppLayout>
-      <main className="h-[calc(100vh-56px)] overflow-y-auto lg:overflow-hidden flex flex-col items-center justify-center px-6 py-4">
-        <div className="w-full max-w-[1100px] flex flex-col justify-center h-full gap-4">
+      <main className="min-h-[calc(100vh-56px)] overflow-y-auto flex flex-col items-center px-10 py-8">
+        <div className="w-full max-w-[1400px] flex flex-col gap-8 m-auto">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-accent/20 mb-2">
-              <Monitor size={22} className="text-accent" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/20 mb-3">
+              <Monitor size={28} className="text-accent" />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight mb-1">Viora</h1>
-            <p className="text-sm text-secondary max-w-[500px] mx-auto">
+            <h1 className="font-display text-4xl tracking-tight mb-2">Viora</h1>
+            <p className="text-base text-secondary max-w-[640px] mx-auto">
               High-quality screen sharing for teams. Share your screen, collaborate in real-time,
               zero setup.
             </p>
           </div>
 
-          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             <FeatureCard
               icon={Zap}
               title="Instant Sessions"
@@ -79,7 +79,7 @@ export function LandingScreen() {
           </div>
 
           <div className="flex gap-6 items-stretch justify-center">
-            <div className="flex-1 flex flex-col max-w-[440px] w-full">
+            <div className="flex-1 flex flex-col max-w-[420px] w-full">
               <div className="flex gap-2 mb-3 border-b border-line pb-2">
                 <div className="flex-1">
                   <Button
@@ -109,13 +109,12 @@ export function LandingScreen() {
                   error={error ?? undefined}
                 />
               )}
+              <p className="text-center text-xs text-muted mt-4">
+                By using Viora, you agree to our <Link to="/terms">Terms of Service</Link> and{' '}
+                <Link to="/privacy">Privacy Policy</Link>
+              </p>
             </div>
           </div>
-
-          <p className="text-center text-xs text-muted">
-            By using Viora, you agree to our <Link to="/terms">Terms of Service</Link> and{' '}
-            <Link to="/privacy">Privacy Policy</Link>
-          </p>
         </div>
       </main>
     </AppLayout>
@@ -125,12 +124,12 @@ export function LandingScreen() {
 function FeatureCard({ icon: Icon, title, desc }: { icon: LucideIcon; title: string; desc: string }) {
   return (
     <Card padding="none" className="flex flex-col h-full">
-      <CardBody className="flex-1 flex flex-col p-4">
-        <div className="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-accent/20 mb-2">
-          <Icon size={16} className="text-accent" />
+      <CardBody className="flex-1 flex flex-col p-6">
+        <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-accent/20 mb-3">
+          <Icon size={20} className="text-accent" />
         </div>
-        <h3 className="text-sm font-semibold mb-1">{title}</h3>
-        <p className="text-xs text-secondary leading-snug flex-1">{desc}</p>
+        <h3 className="text-base font-semibold mb-1">{title}</h3>
+        <p className="text-sm text-secondary leading-snug flex-1">{desc}</p>
       </CardBody>
     </Card>
   );

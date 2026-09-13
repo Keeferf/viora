@@ -22,7 +22,6 @@ export function LegalScreen({ doc }: LegalScreenProps) {
       <TopBar
         title={content.title}
         subtitle={`Effective ${content.effectiveDate}`}
-        showSettings={false}
         left={
           <Button variant="ghost" size="sm" onClick={() => navigate(-1)} aria-label="Back">
             <ArrowLeft size={18} />
@@ -33,7 +32,7 @@ export function LegalScreen({ doc }: LegalScreenProps) {
         <div className="mx-auto w-full max-w-[760px]">
           <Card padding="none">
             <CardHeader>
-              <h1 className="text-xl font-bold tracking-tight">{content.title}</h1>
+              <h1 className="font-display text-xl tracking-tight">{content.title}</h1>
               <p className="text-xs text-muted mt-1">Effective date: {content.effectiveDate}</p>
             </CardHeader>
             <div>

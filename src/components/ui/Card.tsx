@@ -41,7 +41,7 @@ export function CardHeader({
 }
 
 export function CardTitle({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <h3 className={`text-base font-semibold text-primary ${className}`}>{children}</h3>;
+  return <h3 className={`font-display text-base text-primary ${className}`}>{children}</h3>;
 }
 
 export function CardSubtitle({

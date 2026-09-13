@@ -1,5 +1,3 @@
-export type Theme = 'dark' | 'light' | 'system';
-
 export interface Resolution {
   width: number;
   height: number;
@@ -18,7 +16,6 @@ export const RESOLUTIONS: Resolution[] = [
 export const FRAMERATES = [15, 24, 30, 60] as const;
 
 export interface SettingsState {
-  theme: Theme;
   defaultResolution: Resolution;
   defaultFramerate: number;
   hardwareAcceleration: boolean;
@@ -37,7 +34,6 @@ export interface SettingsState {
 }
 
 export const DEFAULT_SETTINGS: SettingsState = {
-  theme: 'system',
   defaultResolution: RESOLUTIONS[2],
   defaultFramerate: 30,
   hardwareAcceleration: true,
@@ -56,7 +52,6 @@ export const DEFAULT_SETTINGS: SettingsState = {
 };
 
 export type SettingsAction =
-  | { type: 'SET_THEME'; payload: Theme }
   | { type: 'SET_RESOLUTION'; payload: Resolution }
   | { type: 'SET_FRAMERATE'; payload: number }
   | { type: 'SET_HARDWARE_ACCELERATION'; payload: boolean }

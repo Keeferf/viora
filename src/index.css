@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
 @theme inline {
+  --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Anton", "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   --color-base: var(--bg-primary);
   --color-surface: var(--bg-secondary);
   --color-raised: var(--bg-tertiary);
@@ -34,13 +36,13 @@
 /* Dark theme is the default (system dark / Tauri desktop) */
 :root {
   color-scheme: dark;
-  --bg-primary: #201d2b;
-  --bg-secondary: #292637;
-  --bg-tertiary: #353147;
-  --bg-hover: #403b56;
-  --fg-primary: #d8d4cf;
-  --fg-secondary: #aaa49c;
-  --fg-muted: #7d7688;
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #161616;
+  --bg-tertiary: #1f1f1f;
+  --bg-hover: #2a2a2a;
+  --fg-primary: #e8e6e3;
+  --fg-secondary: #b8b4b0;
+  --fg-muted: #888480;
   --accent: #7d7abc;
   --accent-hover: #948fd6;
   --accent-muted: rgba(125, 122, 188, 0.22);
@@ -55,90 +57,7 @@
   --success: #069494;
   --success-hover: #0fb5b5;
   --success-muted: rgba(6, 148, 148, 0.2);
-  --border: #3b3650;
-  --border-focus: #7d7abc;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --bg-primary: #d8d4cf;
-    --bg-secondary: #e7e3dc;
-    --bg-tertiary: #cfc8bc;
-    --bg-hover: #c2b9aa;
-    --fg-primary: #241f19;
-    --fg-secondary: #575046;
-    --fg-muted: #857b6e;
-    --accent: #6a66ad;
-    --accent-hover: #7d7abc;
-    --accent-muted: rgba(125, 122, 188, 0.22);
-    --ember: #be5103;
-    --ember-hover: #a84702;
-    --danger: #b7410e;
-    --danger-hover: #9c380c;
-    --danger-muted: rgba(183, 65, 14, 0.14);
-    --warning: #9a7a00;
-    --warning-hover: #b08d00;
-    --warning-muted: rgba(255, 206, 27, 0.35);
-    --success: #067a7a;
-    --success-hover: #069494;
-    --success-muted: rgba(6, 148, 148, 0.16);
-    --border: #b6ad9e;
-    --border-focus: #6a66ad;
-  }
-}
-
-[data-theme="light"] {
-  color-scheme: light;
-  --bg-primary: #d8d4cf;
-  --bg-secondary: #e7e3dc;
-  --bg-tertiary: #cfc8bc;
-  --bg-hover: #c2b9aa;
-  --fg-primary: #241f19;
-  --fg-secondary: #575046;
-  --fg-muted: #857b6e;
-  --accent: #6a66ad;
-  --accent-hover: #7d7abc;
-  --accent-muted: rgba(125, 122, 188, 0.22);
-  --ember: #be5103;
-  --ember-hover: #a84702;
-  --danger: #b7410e;
-  --danger-hover: #9c380c;
-  --danger-muted: rgba(183, 65, 14, 0.14);
-  --warning: #9a7a00;
-  --warning-hover: #b08d00;
-  --warning-muted: rgba(255, 206, 27, 0.35);
-  --success: #067a7a;
-  --success-hover: #069494;
-  --success-muted: rgba(6, 148, 148, 0.16);
-  --border: #b6ad9e;
-  --border-focus: #6a66ad;
-}
-
-[data-theme="dark"] {
-  color-scheme: dark;
-  --bg-primary: #201d2b;
-  --bg-secondary: #292637;
-  --bg-tertiary: #353147;
-  --bg-hover: #403b56;
-  --fg-primary: #d8d4cf;
-  --fg-secondary: #aaa49c;
-  --fg-muted: #7d7688;
-  --accent: #7d7abc;
-  --accent-hover: #948fd6;
-  --accent-muted: rgba(125, 122, 188, 0.22);
-  --ember: #be5103;
-  --ember-hover: #d45e08;
-  --danger: #b7410e;
-  --danger-hover: #d14e12;
-  --danger-muted: rgba(183, 65, 14, 0.18);
-  --warning: #ffce1b;
-  --warning-hover: #ffd94d;
-  --warning-muted: rgba(255, 206, 27, 0.18);
-  --success: #069494;
-  --success-hover: #0fb5b5;
-  --success-muted: rgba(6, 148, 148, 0.2);
-  --border: #3b3650;
+  --border: #333333;
   --border-focus: #7d7abc;
 }
 
@@ -151,8 +70,9 @@
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
     background-color: var(--bg-primary);
     color: var(--fg-primary);
     line-height: 1.5;

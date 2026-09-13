@@ -62,7 +62,7 @@ export function SessionScreen() {
               <div className="mb-4 opacity-50">
                 <Monitor size={64} />
               </div>
-              <h3 className="text-xl font-medium mb-2">Waiting for participants</h3>
+              <h3 className="font-display text-xl mb-2">Waiting for participants</h3>
               <p className="text-sm">
                 Share the room code{' '}
                 <code className="bg-raised px-2 py-0.5 rounded-md">{roomCode}</code> to invite
