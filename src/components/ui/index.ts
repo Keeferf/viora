@@ -1,4 +1,5 @@
 export { Button } from './Button';
+export { ShapeGrid } from './ShapeGrid';
 export { Input } from './Input';
 export { Select } from './Select';
 export { Modal } from './Modal';

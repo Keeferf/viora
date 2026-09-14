@@ -1,17 +1,21 @@
 import { type ReactNode } from 'react';
+import { ShapeGrid } from '@/components/ui';
 
 interface AppLayoutProps {
   children: ReactNode;
   className?: string;
+  animated?: boolean;
 }
 
-export function AppLayout({ children, className = '' }: AppLayoutProps) {
+export function AppLayout({ children, className = '', animated = true }: AppLayoutProps) {
   return (
     <div className={`relative flex flex-col h-full min-h-screen bg-base text-primary overflow-x-clip ${className}`}>
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute inset-0 stage-grid" />
-        <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-accent/10 blur-[80px] will-change-transform" />
-        <div className="absolute -bottom-48 -right-32 h-[420px] w-[420px] rounded-full bg-ember/10 blur-[80px] will-change-transform" />
+        {animated && (
+        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_90%_80%_at_50%_20%,black_30%,transparent_75%)]">
+          <ShapeGrid direction="down" hoverFillColor="rgba(125, 122, 188, 0.5)" hoverTrailAmount={0} />
+        </div>
+        )}        <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-accent/10 blur-[80px] will-change-transform" />
       </div>
       <div className="relative flex flex-col min-h-screen">{children}</div>
     </div>

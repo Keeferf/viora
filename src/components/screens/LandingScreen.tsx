@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Monitor, Users, Zap, Shield, Radio, type LucideIcon } from 'lucide-react';
+import { Monitor, Users, Zap, Shield, type LucideIcon } from 'lucide-react';
 import { JoinForm } from './JoinForm';
 import { CreateForm } from './CreateForm';
-import { AppLayout } from '@/components/layout/AppLayout';
+import { AppLayout, TopBar } from '@/components/layout';
 import { Button } from '@/components/ui';
 
 export function LandingScreen() {
@@ -41,19 +41,14 @@ export function LandingScreen() {
 
   return (
     <AppLayout>
+      <TopBar />
       <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-12 sm:pt-16 pb-10">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start">
           <div className="animate-rise">
-            <p className="flex items-center gap-2 text-sm text-secondary mb-5">
-              <span className="inline-block w-2 h-2 rounded-full bg-ember animate-[live-ping_2s_ease-out_infinite]" />
-              Peer-to-peer screen sharing, no accounts
-            </p>
             <h1 className="font-display uppercase leading-[0.92] tracking-tight text-[clamp(3.2rem,8vw,6.5rem)]">
               Share the
               <br />
               screen.
-              <br />
-              <span className="display-outline">Keep the room.</span>
             </h1>
             <p className="mt-6 text-[17px] leading-relaxed text-secondary max-w-[46ch]">
               Viora opens a direct WebRTC line between you and your team. Drop in with a
@@ -68,11 +63,11 @@ export function LandingScreen() {
               </div>
               <div className="flex-1 px-4 py-3">
                 <dt className="text-xs text-muted">Room code</dt>
-                <dd className="font-display text-xl tracking-wide">6 CHARS</dd>
+                <dd className="font-display text-xl tracking-wide">6 CHARACTERS</dd>
               </div>
               <div className="flex-1 pl-4 py-3">
                 <dt className="text-xs text-muted">Relay via server</dt>
-                <dd className="font-display text-xl tracking-wide text-success">NEVER</dd>
+                <dd className="font-display text-xl tracking-wide text-accent">NEVER</dd>
               </div>
             </dl>
           </div>
@@ -81,15 +76,6 @@ export function LandingScreen() {
             className="animate-rise rounded-[18px] border border-line bg-surface overflow-hidden"
             style={{ animationDelay: '90ms' }}
           >
-            <div className="flex items-center gap-1.5 px-5 pt-4" aria-hidden>
-              <span className="w-2.5 h-2.5 rounded-full bg-danger/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-warning/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-success/80" />
-              <span className="ml-2 flex items-center gap-1.5 text-xs text-muted">
-                <Radio size={12} />
-                viora console
-              </span>
-            </div>
             <div className="grid grid-cols-2 gap-1 p-2 mt-3 mx-4 rounded-full bg-base border border-line">
               <Button
                 variant={activeTab === 'join' ? 'primary' : 'ghost'}
@@ -106,7 +92,7 @@ export function LandingScreen() {
                 Create session
               </Button>
             </div>
-            <div className="p-5 pt-4">
+            <div className="p-5 pt-4 min-h-[386px]">
               {activeTab === 'join' ? (
                 <JoinForm onJoin={handleJoin} isLoading={isLoading} error={error ?? undefined} />
               ) : (
@@ -130,7 +116,7 @@ export function LandingScreen() {
               icon={Zap}
               title="Instant sessions"
               desc="Create or join rooms with a 6-character code. No accounts, no invites, no waiting room."
-              meta="6-char code"
+              meta="6-character code"
             />
             <FeatureRow
               icon={Monitor}

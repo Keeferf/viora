@@ -18,7 +18,8 @@ export function LegalScreen({ doc }: LegalScreenProps) {
   const content = DOCS[doc];
 
   return (
-    <AppLayout>
+    // ponytail: static bg on legal pages — the animated ShapeGrid rAF loop janks long scrolls
+    <AppLayout animated={false}>
       <TopBar
         title={content.title}
         subtitle={`Effective ${content.effectiveDate}`}
