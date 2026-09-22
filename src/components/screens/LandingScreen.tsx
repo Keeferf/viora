@@ -41,21 +41,21 @@ export function LandingScreen() {
 
   return (
     <AppLayout topBar={<TopBar />}>
-      <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-12 sm:pt-16 pb-10">
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start">
+      <main className="flex min-h-full w-full max-w-[1200px] mx-auto flex-col px-6 sm:px-10 pt-6 sm:pt-10 pb-6">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start my-auto">
           <div className="animate-rise">
-            <h1 className="font-display uppercase leading-[0.92] tracking-tight text-[clamp(3.2rem,8vw,6.5rem)]">
+            <h1 className="font-display uppercase leading-[0.92] tracking-tight text-[clamp(2.75rem,6vw,5.25rem)]">
               Share the
               <br />
               screen.
             </h1>
-            <p className="mt-6 text-[17px] leading-relaxed text-secondary max-w-[46ch]">
+            <p className="mt-5 text-[16px] leading-relaxed text-secondary max-w-[46ch]">
               Viora opens a direct WebRTC line between you and your team. Drop in with a
               six-character code, pass the screen around, and get out. Nothing to install
               beyond this window.
             </p>
 
-            <dl className="mt-8 flex divide-x divide-line border-y border-line max-w-[520px]">
+            <dl className="mt-7 flex divide-x divide-line border-y border-line max-w-[520px]">
               <div className="flex-1 py-3 pr-4">
                 <dt className="text-xs text-muted">Setup</dt>
                 <dd className="font-display text-xl tracking-wide">ZERO</dd>
@@ -75,7 +75,7 @@ export function LandingScreen() {
             className="animate-rise rounded-[18px] border border-line bg-surface overflow-hidden"
             style={{ animationDelay: '90ms' }}
           >
-            <div className="grid grid-cols-2 gap-1 p-2 mt-3 mx-4 rounded-full bg-base border border-line">
+            <div className="grid grid-cols-2 gap-1 p-1.5 mt-2 mx-4 rounded-full bg-base border border-line">
               <Button
                 variant={activeTab === 'join' ? 'primary' : 'ghost'}
                 fullWidth
@@ -91,7 +91,7 @@ export function LandingScreen() {
                 Create session
               </Button>
             </div>
-            <div className="p-5 pt-4 min-h-[386px]">
+            <div className="p-4 pt-3 min-h-[300px]">
               {activeTab === 'join' ? (
                 <JoinForm onJoin={handleJoin} isLoading={isLoading} error={error ?? undefined} />
               ) : (
@@ -101,7 +101,7 @@ export function LandingScreen() {
                   error={error ?? undefined}
                 />
               )}
-              <p className="text-center text-xs text-muted mt-4 leading-relaxed">
+              <p className="text-center text-xs text-muted mt-3 leading-relaxed">
                 By using Viora, you agree to our <Link to="/terms">Terms of Service</Link> and{' '}
                 <Link to="/privacy">Privacy Policy</Link>
               </p>
@@ -109,8 +109,12 @@ export function LandingScreen() {
           </div>
         </div>
 
-        <section aria-label="How Viora works" className="mt-14 animate-rise" style={{ animationDelay: '160ms' }}>
-          <ul className="border-t border-line">
+        <section
+          aria-label="How Viora works"
+          className="mt-auto pt-8 animate-rise"
+          style={{ animationDelay: '160ms' }}
+        >
+          <ul className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
             <FeatureRow
               icon={Zap}
               title="Instant sessions"
@@ -134,7 +138,6 @@ export function LandingScreen() {
               title="Adaptive quality"
               desc="Bitrate follows the weakest connection in the room, so the session stays smooth for everyone."
               meta="Auto bitrate"
-              last
             />
           </ul>
         </section>
@@ -148,28 +151,24 @@ function FeatureRow({
   title,
   desc,
   meta,
-  last = false,
 }: {
   icon: LucideIcon;
   title: string;
   desc: string;
   meta: string;
-  last?: boolean;
 }) {
   return (
-    <li
-      className={`flex items-start gap-4 py-5 ${last ? 'border-b border-line' : 'border-b border-line'}`}
-    >
-      <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-[10px] bg-accent/15">
-        <Icon size={19} className="text-accent" />
-      </span>
-      <div className="flex-1 min-w-0">
-        <h2 className="font-semibold text-[15px]">{title}</h2>
-        <p className="text-sm text-secondary leading-relaxed max-w-[62ch] mt-0.5">{desc}</p>
+    <li className="flex flex-col rounded-[14px] border border-line bg-surface/50 p-3.5">
+      <div className="flex items-center justify-between gap-2">
+        <span className="flex items-center justify-center w-9 h-9 shrink-0 rounded-[10px] bg-accent/15">
+          <Icon size={18} className="text-accent" />
+        </span>
+        <span className="text-[11px] font-medium text-muted border border-line rounded-full px-2.5 py-0.5 whitespace-nowrap">
+          {meta}
+        </span>
       </div>
-      <span className="hidden sm:block shrink-0 text-xs font-medium text-muted border border-line rounded-full px-3 py-1 mt-1">
-        {meta}
-      </span>
+      <h2 className="font-semibold text-[14px] mt-3">{title}</h2>
+      <p className="text-[13px] text-secondary leading-relaxed mt-1">{desc}</p>
     </li>
   );
 }
