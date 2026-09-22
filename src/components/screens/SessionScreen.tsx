@@ -61,8 +61,7 @@ export function SessionScreen() {
   const remotePeers = peerArray.filter((p) => p.id !== localPeerId);
 
   return (
-    <AppLayout>
-      <TopBar title={`Room ${roomCode}`} subtitle={connectionStatus} onLeave={handleLeave} />
+    <AppLayout topBar={<TopBar title={`Room ${roomCode}`} subtitle={connectionStatus} onLeave={handleLeave} />}>
       <main className="flex-1 flex flex-col relative bg-black/40">
         {remotePeers.length === 0 ? (
           <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 py-12 max-w-[1200px] w-full mx-auto">

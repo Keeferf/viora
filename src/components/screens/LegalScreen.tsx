@@ -19,16 +19,20 @@ export function LegalScreen({ doc }: LegalScreenProps) {
 
   return (
     // ponytail: static bg on legal pages — the animated ShapeGrid rAF loop janks long scrolls
-    <AppLayout animated={false}>
-      <TopBar
-        title={content.title}
-        subtitle={`Effective ${content.effectiveDate}`}
-        left={
-          <Button variant="ghost" size="sm" onClick={() => navigate(-1)} aria-label="Back">
-            <ArrowLeft size={18} />
-          </Button>
-        }
-      />
+    <AppLayout
+      animated={false}
+      topBar={
+        <TopBar
+          title={content.title}
+          subtitle={`Effective ${content.effectiveDate}`}
+          left={
+            <Button variant="ghost" size="sm" onClick={() => navigate(-1)} aria-label="Back">
+              <ArrowLeft size={18} />
+            </Button>
+          }
+        />
+      }
+    >
       <main className="flex-1 w-full max-w-[720px] mx-auto px-6 sm:px-8 py-10">
         <p className="text-sm text-muted">Effective date: {content.effectiveDate}</p>
         <h1 className="font-display uppercase tracking-tight leading-[0.95] text-[clamp(2.2rem,5vw,3.6rem)] mt-2">

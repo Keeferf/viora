@@ -22,7 +22,7 @@ export function TopBar({ title, subtitle, left, right, onLeave }: TopBarProps) {
     <header
       data-tauri-drag-region
       onDoubleClick={handleDoubleClick}
-      className="sticky top-0 h-12 flex items-center justify-between pl-4 pr-0 bg-base/85 backdrop-blur-md border-b border-line z-[200] shrink-0 select-none"
+      className="relative z-[200] h-12 flex items-center justify-between pl-4 pr-0 bg-base border-b border-line shrink-0 select-none"
     >
       <div data-tauri-drag-region className="flex items-center gap-3 min-w-0">
         {left}

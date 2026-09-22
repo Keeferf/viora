@@ -40,8 +40,7 @@ export function LandingScreen() {
   };
 
   return (
-    <AppLayout>
-      <TopBar />
+    <AppLayout topBar={<TopBar />}>
       <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 pt-12 sm:pt-16 pb-10">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 items-start">
           <div className="animate-rise">

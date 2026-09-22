@@ -98,8 +98,15 @@ export function PreflightScreen() {
   const handleBack = () => navigate(-1);
 
   return (
-    <AppLayout>
-      <TopBar title={`Room ${roomCode}`} subtitle={isHost ? 'You are hosting' : `Joining as ${name || 'guest'}`} onLeave={handleBack} />
+    <AppLayout
+      topBar={
+        <TopBar
+          title={`Room ${roomCode}`}
+          subtitle={isHost ? 'You are hosting' : `Joining as ${name || 'guest'}`}
+          onLeave={handleBack}
+        />
+      }
+    >
       <main className="flex-1 w-full max-w-[1200px] mx-auto px-6 sm:px-10 py-8">
         <div className="animate-rise">
           <h1 className="font-display uppercase tracking-tight leading-none text-[clamp(2rem,4.5vw,3.2rem)]">
