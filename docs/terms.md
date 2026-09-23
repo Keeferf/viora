@@ -1,25 +1,19 @@
 # Viora — Terms of Service
 
 > **Placeholders.** Replace every `[BRACKETED]` token before launch:
-> `[DEVELOPER NAME]` · `[PROVINCE]` · `[EFFECTIVE DATE]` ·
-> `[MIN AGE]`
+> `[EFFECTIVE DATE]`
 >
 > **Not legal advice.** This draft is written for an individual developer
 > operating from Canada. Have it reviewed by a Canadian lawyer before launch.
 
 **Effective date:** `[EFFECTIVE DATE]`
-**Operator:** `[DEVELOPER NAME]`, an individual developer in `[PROVINCE]`, Canada
+**Operator:** the developer, an individual developer in Ontario, Canada
 
-## 1. Acceptance and eligibility
+## 1. Acceptance
 
 By downloading, installing, or using Viora (the "Service"), you agree to these
 Terms of Service ("Terms") and to our Privacy Policy, which is incorporated by
 reference. If you do not agree, do not use the Service.
-
-You must be at least `[MIN AGE]` years old to use Viora (`[MIN AGE]` is 13
-generally, and 14 in Quebec). If you are under the age of majority in your
-province, you represent that a parent or legal guardian has reviewed and
-accepted these Terms on your behalf.
 
 ## 2. The Service
 
@@ -27,7 +21,7 @@ Viora is a peer-to-peer screen-sharing desktop application. It lets you create
 rooms identified by short codes and share your screen, camera, microphone, and
 system audio live with other participants over encrypted WebRTC connections.
 
-Viora is currently experimental software (version 0.1.x). Features may change,
+Viora is currently experimental software. Features may change,
 break, or be removed at any time. We make no commitment regarding uptime,
 availability, or continued development of the Service.
 
@@ -95,11 +89,10 @@ on Viora to contact police, fire, ambulance, or other emergency services.
   audio, and video you share. Because Viora is peer-to-peer and we do not
   store your media, you grant us no ongoing license in it; transmission to
   participants happens on your device at your direction.
-- **Our software stays ours.** Viora, its code, design, name, logo, and
-  branding are owned by `[DEVELOPER NAME]` and are licensed to you — not sold —
-  for personal or internal business use under these Terms. You may not copy,
-  modify, redistribute, or create derivative works of the Service except as
-  permitted by law or with our prior written permission.
+- **Open source.** Viora's source code is released under an open-source license.
+  You may use, copy, modify, redistribute, and fork it under the terms of that
+  license. If you fork or redistribute it, you are responsible for your version
+  and must comply with the license.
 
 ## 8. Third-party content and links
 
@@ -141,7 +134,7 @@ HARMFUL COMPONENTS, OR THAT ENCRYPTION CANNOT BE CIRCUMVENTED.
 
 ## 13. Limitation of liability
 
-TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, `[DEVELOPER NAME]` WILL NOT
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, the developer WILL NOT
 BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE
 DAMAGES, OR ANY LOSS OF DATA, PROFITS, OR REVENUE, ARISING FROM OR RELATED TO
 YOUR USE OF (OR INABILITY TO USE) THE SERVICE — INCLUDING ANY CONTENT SHARED,
@@ -155,7 +148,7 @@ consumer protection legislation of your province.
 
 ## 14. Indemnification
 
-You agree to indemnify and hold harmless `[DEVELOPER NAME]` from any claims,
+You agree to indemnify and hold harmless the developer from any claims,
 damages, losses, and expenses (including reasonable legal fees) arising from
 your use of the Service, your violation of these Terms, or your violation of
 any law or third-party right — including claims arising from content you
@@ -163,9 +156,9 @@ shared or recorded without required rights or consents.
 
 ## 15. Governing law and disputes
 
-These Terms are governed by the laws of `[PROVINCE]`, Canada, and the federal
+These Terms are governed by the laws of Ontario, Canada, and the federal
 laws of Canada applicable there, without regard to conflict-of-laws rules. Any
-dispute shall be brought exclusively before the courts of `[PROVINCE]`, Canada,
+dispute shall be brought exclusively before the courts of Ontario, Canada,
 and you consent to their jurisdiction. Where consumer protection legislation in
 your province grants you additional forum or remedy rights, those rights
 prevail.
@@ -173,7 +166,7 @@ prevail.
 ## 16. General
 
 - **Entire agreement.** These Terms plus the Privacy Policy are the entire
-  agreement between you and `[DEVELOPER NAME]` regarding the Service.
+  agreement between you and the developer regarding the Service.
 - **Severability.** If any provision is found unenforceable, the remaining
   provisions continue in full effect.
 - **No waiver.** Failure to enforce any provision is not a waiver of the right

@@ -76,7 +76,14 @@ function WindowControls() {
   const [maximized, setMaximized] = useState(false);
 
   useEffect(() => {
-    getCurrentWindow().isMaximized().then(setMaximized).catch(() => {});
+    const win = getCurrentWindow();
+    const sync = () => win.isMaximized().then(setMaximized).catch(() => {});
+    sync();
+    // Resized fires on OS-driven changes (drag-to-restore, snap, double-click), so the icon stays in sync.
+    const unlisten = win.onResized(sync);
+    return () => {
+      unlisten.then((f) => f());
+    };
   }, []);
 
   const run = (fn: () => Promise<void>) => () => fn().catch(() => {});

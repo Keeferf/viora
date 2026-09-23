@@ -1,8 +1,7 @@
 # Viora — Privacy Policy
 
 > **Placeholders.** Replace every `[BRACKETED]` token before launch:
-> `[DEVELOPER NAME]` · `[PROVINCE]` · `[EFFECTIVE DATE]` ·
-> `[MIN AGE]` · `[SIGNALING LOG RETENTION]` · `[UPDATE LOG RETENTION]` ·
+> `[EFFECTIVE DATE]` · `[SIGNALING LOG RETENTION]` · `[UPDATE LOG RETENTION]` ·
 > `[SIGNALING PROVIDER]` · `[STUN PROVIDER]` · `[TURN PROVIDER]` · `[UPDATE ENDPOINT]`
 >
 > **Not legal advice.** This draft is structured around Canada's PIPEDA with
@@ -10,7 +9,7 @@
 > Canadian privacy lawyer before launch.
 
 **Effective date:** `[EFFECTIVE DATE]`
-**Operator:** `[DEVELOPER NAME]`, an individual developer in `[PROVINCE]`, Canada
+**Operator:** the developer, an individual developer in Ontario, Canada
 
 ## 1. Summary
 
@@ -148,10 +147,8 @@ legally required.
 
 ## 11. Children
 
-Viora is not directed at children. You must be at least `[MIN AGE]` years old
-to use Viora (`[MIN AGE]` is 13 generally, and 14 in Quebec). We do not
-knowingly collect personal information from anyone below that age; if we learn
-otherwise, we will delete it.
+Viora is not directed at children. We do not knowingly collect personal
+information from children; if we learn that we have, we will delete it.
 
 ## 12. International transfers
 

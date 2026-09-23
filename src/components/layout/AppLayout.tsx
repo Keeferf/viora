@@ -13,10 +13,16 @@ export function AppLayout({ children, topBar, className = '', animated = true }:
     <div className={`relative flex h-dvh flex-col overflow-hidden bg-base text-primary ${className}`}>
       <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
         {animated && (
-        <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_90%_80%_at_50%_20%,black_30%,transparent_75%)]">
-          <ShapeGrid direction="down" hoverFillColor="rgba(125, 122, 188, 0.5)" hoverTrailAmount={0} />
-        </div>
-        )}        <div className="absolute -top-40 -left-40 h-[480px] w-[480px] rounded-full bg-accent/10 blur-[80px] will-change-transform" />
+          <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_90%_80%_at_50%_20%,black_30%,transparent_75%)]">
+            <ShapeGrid
+              direction="down"
+              hoverFillColor="rgba(125, 122, 188, 0.5)"
+              hoverTrailAmount={0}
+              fadeColor="transparent"
+              className="absolute inset-0"
+            />
+          </div>
+        )}
       </div>
       {topBar}
       <div className="relative flex min-h-0 flex-1 flex-col overflow-x-clip overflow-y-auto">{children}</div>
