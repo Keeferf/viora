@@ -323,41 +323,38 @@ function MediaSettingsPanel() {
   const defaultFramerate = useSettingsStore((s) => s.defaultFramerate);
   const dispatch = useSettingsStore((s) => s.dispatch);
 
+  const camera = mediaOptions(hardware?.cameras, cameras, selectedCameraId, 'camera');
+  const microphone = mediaOptions(hardware?.microphones, microphones, selectedMicrophoneId, 'microphone');
+  const speaker = mediaOptions(hardware?.speakers, speakers, selectedSpeakerId, 'speaker');
+
   return (
     <div className="absolute right-0 top-full z-[250] mt-2 w-[300px] animate-rise rounded-[14px] border border-line bg-surface p-4 text-left shadow-[0_16px_40px_-16px_rgba(0,0,0,0.7)]">
       <h2 className="font-display uppercase tracking-wide text-[15px]">Media settings</h2>
       <p className="mt-0.5 text-xs text-secondary">Pick the devices and quality for this session.</p>
-      {hardware && (
-        <ul className="mt-3 flex flex-col gap-1 rounded-[10px] border border-line bg-raised p-2.5">
-          <HardwareRow label="Camera" present={hardware.hasCamera} />
-          <HardwareRow label="Microphone" present={hardware.hasMicrophone} />
-          <HardwareRow label="Speaker" present={hardware.hasSpeaker} />
-        </ul>
-      )}
       <div className="mt-4 flex flex-col gap-3">
         <Select
           label="Camera"
-          value={selectedCameraId}
-          onChange={(e) => setSelectedCamera(e.target.value)}
-          options={deviceOptions(cameras, 'Camera')}
+          value={camera.value}
+          onChange={setSelectedCamera}
+          options={camera.options}
         />
         <Select
           label="Microphone"
-          value={selectedMicrophoneId}
-          onChange={(e) => setSelectedMicrophone(e.target.value)}
-          options={deviceOptions(microphones, 'Microphone')}
+          value={microphone.value}
+          onChange={setSelectedMicrophone}
+          options={microphone.options}
         />
         <Select
           label="Speaker"
-          value={selectedSpeakerId}
-          onChange={(e) => setSelectedSpeaker(e.target.value)}
-          options={deviceOptions(speakers, 'Speaker')}
+          value={speaker.value}
+          onChange={setSelectedSpeaker}
+          options={speaker.options}
         />
         <Select
           label="Resolution"
           value={defaultResolution.label}
-          onChange={(e) => {
-            const next = RESOLUTIONS.find((r) => r.label === e.target.value);
+          onChange={(value) => {
+            const next = RESOLUTIONS.find((r) => r.label === value);
             if (next) dispatch({ type: 'SET_RESOLUTION', payload: next });
           }}
           options={RESOLUTIONS.map((r) => ({ value: r.label, label: r.label }))}
@@ -365,7 +362,7 @@ function MediaSettingsPanel() {
         <Select
           label="Framerate"
           value={String(defaultFramerate)}
-          onChange={(e) => dispatch({ type: 'SET_FRAMERATE', payload: Number(e.target.value) })}
+          onChange={(value) => dispatch({ type: 'SET_FRAMERATE', payload: Number(value) })}
           options={FRAMERATES.map((f) => ({ value: String(f), label: `${f} fps` }))}
         />
       </div>
@@ -373,23 +370,39 @@ function MediaSettingsPanel() {
   );
 }
 
-function HardwareRow({ label, present }: { label: string; present: boolean }) {
-  return (
-    <li className="flex items-center justify-between gap-2 text-xs">
-      <span className="text-secondary">{label}</span>
-      <span className={present ? 'text-success' : 'text-muted'}>
-        {present ? 'Detected' : 'Not detected'}
-      </span>
-    </li>
-  );
+interface MediaOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
 }
 
-function deviceOptions(devices: MediaDeviceInfo[], fallback: string) {
-  if (!devices.length) return [{ value: 'default', label: 'No devices found', disabled: true }];
-  return devices.map((device, i) => ({
-    value: device.deviceId,
-    label: device.label || `${fallback} ${i + 1}`,
-  }));
+/**
+ * Backend-detected devices win (names, available before any permission prompt);
+ * otherwise fall back to the browser's enumerated devices (which carry the
+ * `deviceId` used to actually open a stream). Always returns a value that
+ * exists in the options so the select never renders blank.
+ */
+function mediaOptions(
+  detected: string[] | undefined,
+  devices: MediaDeviceInfo[],
+  selected: string,
+  fallback: string,
+): { options: MediaOption[]; value: string } {
+  let options: MediaOption[];
+  if (detected?.length) {
+    options = detected.map((name) => ({ value: name, label: name }));
+  } else if (devices.length) {
+    options = devices.map((device, i) => ({
+      value: device.deviceId,
+      label: device.label || `${fallback.replace(/^./, (c) => c.toUpperCase())} ${i + 1}`,
+    }));
+  } else {
+    options = [{ value: 'none', label: `No ${fallback} detected`, disabled: true }];
+  }
+  const value = options.some((option) => option.value === selected && !option.disabled)
+    ? selected
+    : options[0].value;
+  return { options, value };
 }
 
 function initials(name: string) {
