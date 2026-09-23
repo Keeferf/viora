@@ -71,6 +71,13 @@ export interface MediaDeviceInfo {
   groupId: string;
 }
 
+/** Presence of physical hardware, reported by the Tauri backend. */
+export interface HardwareInfo {
+  hasCamera: boolean;
+  hasMicrophone: boolean;
+  hasSpeaker: boolean;
+}
+
 export interface ScreenSource {
   id: string;
   name: string;

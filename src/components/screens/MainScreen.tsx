@@ -46,6 +46,7 @@ export function MainScreen() {
   const setScreenSharing = useSessionStore((s) => s.setScreenSharing);
 
   const enumerateDevices = useMediaStore((s) => s.enumerateDevices);
+  const detectHardware = useMediaStore((s) => s.detectHardware);
   const mirrorSelfView = useSettingsStore((s) => s.mirrorSelfView);
 
   const [mediaError, setMediaError] = useState<string | null>(null);
@@ -65,6 +66,7 @@ export function MainScreen() {
     let cancelled = false;
 
     void enumerateDevices();
+    void detectHardware();
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((s) => {
@@ -85,7 +87,7 @@ export function MainScreen() {
       cancelled = true;
       stream?.getTracks().forEach((t) => t.stop());
     };
-  }, [enumerateDevices, setLocalStream]);
+  }, [enumerateDevices, detectHardware, setLocalStream]);
 
   const handleLeave = useCallback(() => {
     leaveRoom();
@@ -309,6 +311,7 @@ function MediaSettingsPanel() {
   const cameras = useMediaStore((s) => s.cameras);
   const microphones = useMediaStore((s) => s.microphones);
   const speakers = useMediaStore((s) => s.speakers);
+  const hardware = useMediaStore((s) => s.hardware);
   const selectedCameraId = useMediaStore((s) => s.selectedCameraId);
   const selectedMicrophoneId = useMediaStore((s) => s.selectedMicrophoneId);
   const selectedSpeakerId = useMediaStore((s) => s.selectedSpeakerId);
@@ -324,6 +327,13 @@ function MediaSettingsPanel() {
     <div className="absolute right-0 top-full z-[250] mt-2 w-[300px] animate-rise rounded-[14px] border border-line bg-surface p-4 text-left shadow-[0_16px_40px_-16px_rgba(0,0,0,0.7)]">
       <h2 className="font-display uppercase tracking-wide text-[15px]">Media settings</h2>
       <p className="mt-0.5 text-xs text-secondary">Pick the devices and quality for this session.</p>
+      {hardware && (
+        <ul className="mt-3 flex flex-col gap-1 rounded-[10px] border border-line bg-raised p-2.5">
+          <HardwareRow label="Camera" present={hardware.hasCamera} />
+          <HardwareRow label="Microphone" present={hardware.hasMicrophone} />
+          <HardwareRow label="Speaker" present={hardware.hasSpeaker} />
+        </ul>
+      )}
       <div className="mt-4 flex flex-col gap-3">
         <Select
           label="Camera"
@@ -360,6 +370,17 @@ function MediaSettingsPanel() {
         />
       </div>
     </div>
+  );
+}
+
+function HardwareRow({ label, present }: { label: string; present: boolean }) {
+  return (
+    <li className="flex items-center justify-between gap-2 text-xs">
+      <span className="text-secondary">{label}</span>
+      <span className={present ? 'text-success' : 'text-muted'}>
+        {present ? 'Detected' : 'Not detected'}
+      </span>
+    </li>
   );
 }
 
