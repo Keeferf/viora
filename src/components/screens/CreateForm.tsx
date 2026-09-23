@@ -9,7 +9,7 @@ interface CreateFormProps {
 }
 
 export function CreateForm({ onCreate, isLoading, error }: CreateFormProps) {
-  const [name, setName] = useState(() => localStorage.getItem('viora-display-name') || '');
+  const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
 
   const handleSubmit = (e: FormEvent | MouseEvent) => {
@@ -27,7 +27,6 @@ export function CreateForm({ onCreate, isLoading, error }: CreateFormProps) {
       return;
     }
 
-    localStorage.setItem('viora-display-name', cleanName);
     onCreate(cleanName);
   };
 
@@ -39,8 +38,9 @@ export function CreateForm({ onCreate, isLoading, error }: CreateFormProps) {
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Input
-          label="Your name"
-          placeholder="Ada Lovelace"
+          placeholder="Your name"
+          aria-label="Your name"
+          className="text-center placeholder:text-center"
           value={name}
           onChange={(e) => setName(e.target.value)}
           error={nameError || undefined}

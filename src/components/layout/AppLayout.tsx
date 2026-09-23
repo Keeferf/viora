@@ -16,7 +16,6 @@ export function AppLayout({ children, topBar, className = '', animated = true }:
           <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_90%_80%_at_50%_20%,black_30%,transparent_75%)]">
             <ShapeGrid
               direction="down"
-              hoverFillColor="rgba(125, 122, 188, 0.5)"
               hoverTrailAmount={0}
               fadeColor="transparent"
               className="absolute inset-0"

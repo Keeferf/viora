@@ -91,16 +91,25 @@ export function LandingScreen() {
                 Create session
               </Button>
             </div>
-            <div className="p-4 pt-3 min-h-[300px]">
-              {activeTab === 'join' ? (
-                <JoinForm onJoin={handleJoin} isLoading={isLoading} error={error ?? undefined} />
-              ) : (
-                <CreateForm
-                  onCreate={handleCreate}
-                  isLoading={isLoading}
-                  error={error ?? undefined}
-                />
-              )}
+            <div className="p-4 pt-3">
+              {/* Both panels share one grid cell so the card is always the height of
+                  the taller (join) form and never shifts when switching tabs. */}
+              <div className="grid">
+                <div
+                  className={`col-start-1 row-start-1 ${activeTab === 'join' ? '' : 'invisible'}`}
+                >
+                  <JoinForm onJoin={handleJoin} isLoading={isLoading} error={error ?? undefined} />
+                </div>
+                <div
+                  className={`col-start-1 row-start-1 ${activeTab === 'create' ? '' : 'invisible'}`}
+                >
+                  <CreateForm
+                    onCreate={handleCreate}
+                    isLoading={isLoading}
+                    error={error ?? undefined}
+                  />
+                </div>
+              </div>
               <p className="text-center text-xs text-muted mt-3 leading-relaxed">
                 By using Viora, you agree to our <Link to="/terms">Terms of Service</Link> and{' '}
                 <Link to="/privacy">Privacy Policy</Link>

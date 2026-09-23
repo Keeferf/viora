@@ -16,9 +16,9 @@ interface ShapeGridProps {
 export function ShapeGrid({
   direction = 'right',
   speed = 0.6,
-  borderColor = 'rgba(232, 230, 227, 0.08)',
+  borderColor,
   squareSize = 44,
-  hoverFillColor = 'rgba(125, 122, 188, 0.25)',
+  hoverFillColor,
   hoverTrailAmount = 8,
   fadeColor = '#0d0d0d',
   className = '',
@@ -37,18 +37,41 @@ export function ShapeGrid({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Colors come from theme CSS vars so the grid follows light/dark; refresh on theme switch.
+    const resolveColors = () => {
+      const styles = getComputedStyle(document.documentElement);
+      return {
+        border:
+          borderColor ?? (styles.getPropertyValue('--grid-line').trim() || 'rgba(232, 230, 227, 0.08)'),
+        hover:
+          hoverFillColor ?? (styles.getPropertyValue('--grid-hover').trim() || 'rgba(125, 122, 188, 0.5)'),
+      };
+    };
+    const colors = { current: resolveColors() };
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const drawStatic = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = canvas.offsetWidth * dpr;
       canvas.height = canvas.offsetHeight * dpr;
-      ctx.scale(dpr, dpr);
-      ctx.strokeStyle = borderColor;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.strokeStyle = colors.current.border;
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       for (let x = 0; x < w; x += squareSize) {
         for (let y = 0; y < h; y += squareSize) ctx.strokeRect(x, y, squareSize, squareSize);
       }
-      return;
+    };
+
+    const themeObserver = new MutationObserver(() => {
+      colors.current = resolveColors();
+      if (prefersReducedMotion) drawStatic();
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    if (prefersReducedMotion) {
+      drawStatic();
+      return () => themeObserver.disconnect();
     }
 
     const resizeCanvas = () => {
@@ -79,11 +102,11 @@ export function ShapeGrid({
           const alpha = cellOpacities.current.get(key);
           if (alpha) {
             ctx.globalAlpha = alpha;
-            ctx.fillStyle = hoverFillColor;
+            ctx.fillStyle = colors.current.hover;
             ctx.fillRect(sx, sy, squareSize, squareSize);
             ctx.globalAlpha = 1;
           }
-          ctx.strokeStyle = borderColor;
+          ctx.strokeStyle = colors.current.border;
           ctx.strokeRect(sx, sy, squareSize, squareSize);
         }
       }
@@ -205,6 +228,7 @@ export function ShapeGrid({
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       tryStop();
+      themeObserver.disconnect();
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);

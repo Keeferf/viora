@@ -30,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             className={[
               'w-full px-4 py-3 text-[15px] font-medium bg-base border rounded-[10px] text-primary',
-              'placeholder:text-muted placeholder:font-normal transition-all outline-hidden',
+              'placeholder:text-muted placeholder:font-normal transition-[border-color,background-color,box-shadow] outline-hidden',
               'hover:border-muted focus:border-focus focus:ring-2 focus:ring-accent/25 focus:bg-surface',
               'disabled:opacity-50 disabled:cursor-not-allowed',
               error ? 'border-danger focus:ring-danger/20' : 'border-line',

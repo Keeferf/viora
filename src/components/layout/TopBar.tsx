@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import { LogOut, Minus, Square, Copy, X } from 'lucide-react';
+import { LogOut, Minus, Square, Copy, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui';
+import { getTheme, setTheme, type Theme } from '@/lib/theme';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
 interface TopBarProps {
@@ -39,6 +40,7 @@ export function TopBar({ title, subtitle, left, right, onLeave }: TopBarProps) {
           >
             Viora
           </span>
+          <ThemeToggle />
           {(title || subtitle) && (
             <>
               <span aria-hidden className="w-px h-5 bg-line shrink-0" />
@@ -69,6 +71,27 @@ export function TopBar({ title, subtitle, left, right, onLeave }: TopBarProps) {
         {isTauri() && <WindowControls />}
       </div>
     </header>
+  );
+}
+
+function ThemeToggle() {
+  const [theme, setThemeState] = useState<Theme>(getTheme);
+  const next: Theme = theme === 'dark' ? 'light' : 'dark';
+  const Icon = theme === 'dark' ? Sun : Moon;
+
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      aria-label={`Switch to ${next} theme`}
+      title={`Switch to ${next} theme`}
+      onClick={() => {
+        setTheme(next);
+        setThemeState(next);
+      }}
+    >
+      <Icon size={16} />
+    </Button>
   );
 }
 

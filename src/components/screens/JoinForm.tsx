@@ -10,7 +10,7 @@ interface JoinFormProps {
 
 export function JoinForm({ onJoin, isLoading, error }: JoinFormProps) {
   const [roomCode, setRoomCode] = useState('');
-  const [name, setName] = useState(() => localStorage.getItem('viora-display-name') || '');
+  const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
   const [codeError, setCodeError] = useState('');
 
@@ -39,7 +39,6 @@ export function JoinForm({ onJoin, isLoading, error }: JoinFormProps) {
       return;
     }
 
-    localStorage.setItem('viora-display-name', cleanName);
     onJoin(cleanCode, cleanName);
   };
 
@@ -56,8 +55,8 @@ export function JoinForm({ onJoin, isLoading, error }: JoinFormProps) {
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Input
-          label="Room code"
-          placeholder="A7K9M2"
+          placeholder="Room code"
+          aria-label="Room code"
           value={roomCode}
           onChange={handleCodeChange}
           error={codeError || error || undefined}
@@ -66,11 +65,12 @@ export function JoinForm({ onJoin, isLoading, error }: JoinFormProps) {
           spellCheck={false}
           autoFocus
           disabled={isLoading}
-          className="room-code-type text-center text-lg font-bold uppercase"
+          className="text-center text-lg font-bold"
         />
         <Input
-          label="Your name"
-          placeholder="Ada Lovelace"
+          placeholder="Your name"
+          aria-label="Your name"
+          className="text-center placeholder:text-center"
           value={name}
           onChange={(e) => setName(e.target.value)}
           error={nameError || undefined}
