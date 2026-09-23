@@ -47,10 +47,7 @@ export function TopBar({ title, subtitle, left, right, onLeave }: TopBarProps) {
               <div data-tauri-drag-region className="min-w-0 leading-tight">
                 {title && <h1 className="text-[13px] font-semibold truncate">{title}</h1>}
                 {subtitle && (
-                  <p className="text-xs text-secondary truncate flex items-center gap-1.5">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-ember animate-[live-ping_2s_ease-out_infinite] shrink-0" />
-                    {subtitle}
-                  </p>
+                  <p className="text-xs text-secondary truncate">{subtitle}</p>
                 )}
               </div>
             </>
@@ -62,8 +59,8 @@ export function TopBar({ title, subtitle, left, right, onLeave }: TopBarProps) {
           <div className="flex items-center gap-1 mr-1">
             {right}
             {onLeave && (
-              <Button variant="ghost" size="sm" onClick={onLeave} aria-label="Leave room" title="Leave">
-                <LogOut size={16} />
+              <Button variant="ghost" size="sm" shape="rounded" onClick={onLeave} aria-label="Leave room" title="Leave">
+                <LogOut size={16} className="text-danger" />
               </Button>
             )}
           </div>
@@ -83,6 +80,7 @@ function ThemeToggle() {
     <Button
       variant="ghost"
       size="sm"
+      shape="rounded"
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}
       onClick={() => {
